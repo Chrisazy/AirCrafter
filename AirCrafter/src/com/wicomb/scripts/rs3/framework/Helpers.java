@@ -23,10 +23,11 @@ public class Helpers {
 	public static void stepAndWait(Locatable l,final ClientContext ctx)  {
 		ctx.movement.step(l);
 		Condition.wait(new Callable<Boolean>() {
-
 			@Override
 			public Boolean call() throws Exception {
 				if (ctx.players.local().animation() == -1)
+					return true;
+				if (distance(ctx.movement.destination(),ctx) < 8)
 					return true;
 				return false;
 			}
